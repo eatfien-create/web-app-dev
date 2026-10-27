@@ -48,5 +48,12 @@ Create: `POST /api/ticket/` (public, used by the assistant and the support form)
 ## Deploy
 Any host that runs Django works (Render, Railway, Fly). Start command `gunicorn thanish_web_project.wsgi`, build command `pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed`. Set the env vars above (MongoDB Atlas free tier for `MONGO_URI`).
 
+## Deploy on Vercel
+Vercel's disk is read-only, so use a hosted Postgres (Neon free tier) for the SQL database and MongoDB Atlas for chat logs. Environment variables on Vercel: `SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS=.vercel.app`, `DATABASE_URL`, `MONGO_URI`, `MONGO_DB=vivaria`. Create the tables once from your machine:
+```bash
+DATABASE_URL='<neon string>' SECRET_KEY=x python manage.py migrate
+DATABASE_URL='<neon string>' SECRET_KEY=x python manage.py seed
+```
+
 ## Proposed improvement
 Let the assistant use a language model to rephrase FAQ answers for the user's chamber (for example, quoting their species' VPD target), while still refusing to answer outside the FAQ data. This keeps answers grounded but makes them less generic.

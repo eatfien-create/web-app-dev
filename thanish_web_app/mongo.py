@@ -39,10 +39,14 @@ def save(collection, doc):
             return 'mongodb'
         except Exception:
             logger.exception('Mongo insert failed, using file fallback')
-    FALLBACK_DIR.mkdir(exist_ok=True)
-    with open(FALLBACK_DIR / f'{collection}.jsonl', 'a') as f:
-        f.write(json.dumps(doc, default=str) + '\n')
-    return 'file'
+    try:
+        FALLBACK_DIR.mkdir(exist_ok=True)
+        with open(FALLBACK_DIR / f'{collection}.jsonl', 'a') as f:
+            f.write(json.dumps(doc, default=str) + '\n')
+        return 'file'
+    except OSError:  # read-only filesystem (serverless): keep the app working, log instead
+        logger.warning('Could not persist %s record; set MONGO_URI', collection)
+        return 'none'
 
 
 def ping():

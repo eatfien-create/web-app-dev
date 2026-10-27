@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "thanish_web_project/wsgi.py", "use": "@vercel/python", "config": { "maxLambdaSize": "50mb" } }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "thanish_web_project/wsgi.py" }
+  ]
+}
