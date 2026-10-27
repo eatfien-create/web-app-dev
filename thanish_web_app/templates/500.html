@@ -1,0 +1,24 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>500 · Server error · VivariaOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'app/app.css' %}">
+</head>
+<body>
+  <main class="errpage">
+    {% include "_topo.html" %}
+    <div>
+      <div class="num">500</div>
+      <h1>The chamber controller tripped.</h1>
+      <p class="lede" style="margin:1rem auto 0">Something went wrong on our side. It has been logged. Try again in a moment.</p>
+      <div class="actions">
+        <a class="pill-btn" href="/?ask=I%20got%20a%20500%20error">Ask the assistant</a>
+        <a class="pill-btn" href="/">Back home</a>
+        <a class="pill-btn" href="/status/">System status</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

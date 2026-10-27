@@ -1,0 +1,24 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 · Page not found · VivariaOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'app/app.css' %}">
+</head>
+<body>
+  <main class="errpage">
+    {% include "_topo.html" %}
+    <div>
+      <div class="num">404</div>
+      <h1>This path is lost in the canopy.</h1>
+      <p class="lede" style="margin:1rem auto 0">We couldn't find <code>{{ request.path }}</code>. It may have moved, or the address was mistyped.</p>
+      <div class="actions">
+        <a class="pill-btn" href="/?ask=I%20got%20a%20404%20error">Ask the assistant</a>
+        <a class="pill-btn" href="/">Back home</a>
+        <a class="pill-btn" href="/faq/">Read the FAQ</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
